@@ -1,69 +1,46 @@
 #include<stdio.h>
-#include "DS.h"
-void main(){
-    int position = -1;
-    int store;
-    int list[50];
-    int size;
-    int temp;
-    
-    int largest;
-    
-    
-  ////////////////////////////////////////////////////////////  
-    printf("\nEnter the number of elements:");
-    scanf("%d", &size);
-    
-    for(int i = 0; i < size; i++){
-        
-        printf("\nEnter number %d:", i+1);
-        scanf("%d", &list[i]);
-        
-    
-    }
-    
-  /////////////////////////////////////////////////////////////
 
-  /////////////////////////////////////////////////////////////  
-  
-    int _size = size;
-    largest = list[size - 1];
-    for(int j = 0; j < _size; j++)
-        for(int i = 0; i < _size; i++){
-            if(list[i] > largest) {temp = largest; largest = list[i]; list[i] = temp;}
-        }
-   printf("\nThe sorted array is:");
-   for(int i = 0; i < size; i++){
-        
-        printf("%d ", list[i]);
-        
+void main()
+{
+    int list[100], n;
     
-    } 
-  /////////////////////////////////////////////////////////////    
-    
-    int low = 0;
-    int high = size - 1 ;
-    int mid = (high + low) / 2;
-    printf("\nEnterthe element to be searched:");    
-    scanf("%d", &store);
-    
-    while(low <= high){
-    
-    
-        
-        if(list[mid] < store){
-            low = mid + 1;
-        }
-        else if(mid == store){
-            printf("\nElement found at index %d", mid);
-            break;
-        }
-        else high = mid - 1;
-        
-        mid = (low + high) / 2;
-    
+    //// List Input ////
+    printf("Enter number of elements in list:");
+    scanf("%d", &n);
+    printf("Enter the list elements:");
+    for(int i = 0; i < n; i++){
+        scanf("%d", &list[i]);
     }
+    ////////////////////
     
-    if(low > high) printf("\nThe number is not present in array");
+    ///// Sorting //////
+    int temp;
+    for(int i = 0; i < n ; i++)
+        for(int j = i; j < n; j++)
+            if(list[i]>list[j]){
+                temp = list[i];
+                list[i] = list[j];
+                list[j] = temp;
+            }
+    printf("\n The sorted array:");
+    for(int i = 0; i < n ; i++) printf("%d ", list[i]);    
     
+    ////////////////////
+    int search;
+    printf("Enter number to be searched:");
+    scanf("%d", &search);
+    
+    // Binary Search //
+    int low = 0;
+    int high = n - 1;
+    int pos = -1;
+    while(low<high){
+        int mid = (high + low) / 2;
+        if(list[mid] == search) {pos = mid; break;}
+        else if(list[mid]<search) low = mid + 1;
+        else high = mid - 1;
+    } 
+    
+    if(pos==-1) printf("\n Number is not present in array");
+    else printf("\n Number is at index: %d",pos);   
 }
