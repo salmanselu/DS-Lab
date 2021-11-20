@@ -15,8 +15,8 @@ void main()
     
     ///// Sorting //////
     int temp;
-    for(int i = 0; i < n ; i++)
-        for(int j = i; j < n; j++)
+    for(int i = 0; i < n - 1 ; i++)
+        for(int j = i; j < n - i - 1; j++)
             if(list[i]>list[j]){
                 temp = list[i];
                 list[i] = list[j];
